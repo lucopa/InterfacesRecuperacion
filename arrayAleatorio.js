@@ -13,7 +13,7 @@ console.log(arrayNuevo)
 let numMin = Infinity;
 let numMax = -Infinity;
 
-for (let i = 1; i < arrayNuevo.length; i++) {
+for (let i = 0; i < arrayNuevo.length; i++) {
     if(arrayNuevo[i]>numMax){
         numMax = arrayNuevo[i];
     }
@@ -29,3 +29,21 @@ console.log(numMin)
 
 //buscar dentro de un array una secuencia de numeros
 
+function buscar(array, busqueda){
+  let i = 0;
+  let j = 0;
+  while (i > array.length) {
+    j=0;
+    while(j<busqueda.length){
+        if (array[i+j] !== busqueda[j]){
+            break;
+        }
+        j++;
+    }
+    if( j == busqueda.length){
+        return i;
+    }
+    i++
+  }
+  return -1;
+}

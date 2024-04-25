@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pokemonDiv{
+            border-radius: 2px solid black;
+            text-align: center;
+            width: 300px; 
+            height: 300px; 
+            margin: 40px;
+            display: inline-block; 
+            background-color: bisque;
+        } 
+        body{
+            background-color: rgb(178, 99, 4)
+        }
+    </style>
+</head>
+<body>
+    <div id="principal"></div>
+    <script>
+        async function cargarPokemons(){
+            const url = "https://pokeapi.co/api/v2/pokemon";
+            const response = await fetch(url);
+            const data = await response.json();
+            const div = document.getElementById("principal");
+            div.className="bloque"
+
+
+            data.results.forEach(async pokemon => {
+                const pokemonResponse = await fetch(pokemon.url);
+                const pokemonData = await pokemonResponse.json();
+
+                const pokemonDiv = document.createElement("div");
+                pokemonDiv.className="pokemonDiv";
+
+                const nombrePokemon = document.createElement("h1");
+                nombrePokemon.textContent= pokemonData.name;
+
+                pokemonDiv.appendChild(nombrePokemon);
+
+                const abilities = document.createElement("ul");
+                pokemonData.abilities.forEach(ability =>{
+                    const abilityItem = document.createElement("li");
+                    abilityItem.textContent = ability.ability.name;
+                    pokemonDiv.appendChild(abilityItem);
+                   
+                })
+                
+
+                const imagenDelantera = document.createElement("img");
+                imagenDelantera.src = pokemonData.sprites.front_default;
+                const imagenTrasera = document.createElement("img");
+                imagenTrasera.src = pokemonData.sprites.back_default;
+                pokemonDiv.appendChild(imagenDelantera);
+                pokemonDiv.appendChild(imagenTrasera);
+                
+                div.appendChild(pokemonDiv);
+
+                
+            });
+        }
+        cargarPokemons();
+    </script>
+</body>
+</html>

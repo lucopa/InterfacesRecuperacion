@@ -76,7 +76,7 @@ console.log(comprobar2);
 const comprobar3 = /^[A-Z]/.test(cadenaNumeros);
 console.log(comprobar3);
 
-const numero = "Este numero es +34 6756464"
-const comprobar4 = /\+\[0-9]/.test(numero);
+const numero = "Este numero es +346756464"
+const comprobar4 = /\+\[0-9]{2}/.test(numero);
 console.log(comprobar4);
 

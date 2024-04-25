@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #mensajes{
+            background-color: aqua;
+            
+        }
+        .h1{
+            background-color: rgb(0, 8, 255);
+            text-align: center;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="mensajes"></div>
+    
+    <script>
+        async function cargarPosts(){
+            const url = "https://jsonplaceholder.typicode.com/users"
+            const response = await fetch(url);
+            const datos = await response.json();
+            const divPosts = document.getElementById("mensajes");
+
+            datos.forEach(user => { 
+                const h1 = document.createElement("h1");
+                h1.textContent = user.username;
+                h1.className = "h1"
+                const div = document.createElement("div");
+                const h2 = document.createElement("p");
+                h2.textContent = "Nombre de usuario: "+ user.name;
+                const p = document.createElement("p");
+                p.textContent = "Direccion: "+user.address.street;
+                div.appendChild(h1);
+                div.appendChild(h2);
+                div.appendChild(p);
+                divPosts.appendChild(div);
+            });  
+        }
+        cargarPosts();
+
+
+    </script>
+</body>
+</html>

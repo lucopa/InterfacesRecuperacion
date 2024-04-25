@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon</title>
+</head>
+<body>
+    <div id="principal"></div>
+
+    <script>
+        async function cargarPosts(){
+            const url = "https://pokeapi.co/api/v2/pokemon";
+            const response = await fetch(url);
+            const data = await response.json();
+            const divPrincipal = document.getElementById("principal");
+
+            data.results.forEach(async pokemon => {
+                const pokemonResponse = await fetch(pokemon.url);
+                const pokemonData = await pokemonResponse.json();
+
+                const pokemonDiv = document.createElement("div");
+                pokemonDiv.classList.add("pokemon");
+
+                const img = document.createElement("img");
+                img.src = pokemonData.sprites.front_default;
+
+                const name = document.createElement("h1");
+                name.textContent = pokemonData.name;
+
+                const abilities = document.createElement("ul");
+                pokemonData.abilities.forEach(ability => {
+                    const abilityItem = document.createElement("li");
+                    abilityItem.textContent = ability.ability.name;
+                    abilities.appendChild(abilityItem);
+                });
+
+                pokemonDiv.appendChild(img);
+                pokemonDiv.appendChild(name);
+                pokemonDiv.appendChild(abilities);
+
+                divPrincipal.appendChild(pokemonDiv);
+            });
+        }
+        cargarPosts();
+    </script>
+</body>
+</html>

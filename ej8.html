@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acertijo Matematico</title>
+</head>
+<body>
+    <h1>ACERTIJO MATEMATICO</h1>
+    <p id="acertijo"></p>
+    <form id="formulario">
+        <input type="number" id="numero">
+        <button type="submit" id="comprobar">Comprobar</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+            const numero1 = 45;
+            const numero2 = 10;
+            const signo1 = "+";
+            const signo2 = "-";
+
+            const expresion = `${numero1}${signo1}${numero2}${signo2}${numero2}`
+
+            document.getElementById("acertijo").textContent = expresion;
+
+
+            document.getElementById("forma").addEventListener("submit", function(event){
+            event.preventDefault();
+
+            const usuarioResp = parseInt(document.getElementById("numero").value);
+            const correcta = numero1+numero2-numero2;
+
+            if(usuarioResp == correcta){
+                document.getElementById("resultado").textContent= "Respuesta correcta"
+            } else{
+            document.getElementById("resultado").textContent= "Respuesta incorrecta";
+
+            }
+        })
+
+    </script>
+    
+</body>
+</html>
